@@ -1,0 +1,51 @@
+C:\Users\Gabriel\AppData\Local\Temporary Projects\ControlVentas\bin\Debug\ControlVentas.exe
+C:\Users\Gabriel\AppData\Local\Temporary Projects\ControlVentas\bin\Debug\ControlVentas.pdb
+C:\Users\Gabriel\AppData\Local\Temporary Projects\ControlVentas\obj\Debug\MainWindow.baml
+C:\Users\Gabriel\AppData\Local\Temporary Projects\ControlVentas\obj\Debug\MainWindow.g.cs
+C:\Users\Gabriel\AppData\Local\Temporary Projects\ControlVentas\obj\Debug\App.g.cs
+C:\Users\Gabriel\AppData\Local\Temporary Projects\ControlVentas\obj\Debug\ControlVentas_MarkupCompile.cache
+C:\Users\Gabriel\AppData\Local\Temporary Projects\ControlVentas\obj\Debug\ControlVentas.g.resources
+C:\Users\Gabriel\AppData\Local\Temporary Projects\ControlVentas\obj\Debug\ControlVentas.Properties.Resources.resources
+C:\Users\Gabriel\AppData\Local\Temporary Projects\ControlVentas\obj\Debug\ControlVentas.csproj.GenerateResource.Cache
+C:\Users\Gabriel\AppData\Local\Temporary Projects\ControlVentas\obj\Debug\ControlVentas.exe
+C:\Users\Gabriel\AppData\Local\Temporary Projects\ControlVentas\obj\Debug\ControlVentas.pdb
+C:\Users\Gabriel\AppData\Local\Temporary Projects\ControlVentas\obj\Debug\ControlVentas.csprojResolveAssemblyReference.cache
+C:\Users\Gabriel\AppData\Local\Temporary Projects\ControlVentas\obj\Debug\App.baml
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\obj\Debug\ControlVentas.exe
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\obj\Debug\ControlVentas.pdb
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\bin\Debug\ControlVentas.exe
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\bin\Debug\ControlVentas.pdb
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\obj\Debug\ControlVentas.csprojResolveAssemblyReference.cache
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\obj\Debug\App.baml
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\obj\Debug\App.g.cs
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\obj\Debug\ControlVentas_MarkupCompile.cache
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\obj\Debug\ControlVentas.g.resources
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\obj\Debug\ControlVentas.Properties.Resources.resources
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\obj\Debug\ControlVentas.csproj.GenerateResource.Cache
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\bin\Debug\ControlVentas.exe.config
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\bin\Debug\Mono.Security.dll
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\bin\Debug\Npgsql.dll
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\bin\Debug\Npgsql.pdb
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\bin\Debug\Npgsql.xml
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\bin\Debug\de\Npgsql.resources.dll
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\bin\Debug\es\Npgsql.resources.dll
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\bin\Debug\fi\Npgsql.resources.dll
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\bin\Debug\fr\Npgsql.resources.dll
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\bin\Debug\ja\Npgsql.resources.dll
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\bin\Debug\zh-CN\Npgsql.resources.dll
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\obj\Debug\vista\MainWindow.baml
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\obj\Debug\vista\CrearCategoria.baml
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\obj\Debug\vista\MainWindow.g.cs
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\obj\Debug\vista\CrearCategoria.g.cs
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\obj\Debug\vista\EditarCategoria.baml
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\obj\Debug\vista\EditarCategoria.g.cs
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\obj\Debug\vista\CrearProducto.baml
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\obj\Debug\vista\CrearProducto.g.cs
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\obj\Debug\vista\EditarProducto.baml
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\obj\Debug\vista\EditarProducto.g.cs
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\obj\Debug\vista\VerDetalleVenta.baml
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\obj\Debug\vista\VerDetalleVenta.g.cs
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\obj\Debug\vista\Mensaje.baml
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\obj\Debug\vista\Mensaje.g.cs
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\obj\Debug\vista\MontoDePago.baml
+C:\Users\Gabriel\Documents\Visual Studio 2012\Projects\ControlVentas\ControlVentas\obj\Debug\vista\MontoDePago.g.cs

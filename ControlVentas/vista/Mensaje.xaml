@@ -1,0 +1,14 @@
+﻿<Window x:Class="ControlVentas.vista.Mensaje"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Mensaje del sistema" Height="201.414" Width="481.274"  WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid Margin="0,0,-6,-3">
+        <Label Name="labelTexto" Grid.Row="0" Content="¡Debes seleccionar el check box para comenzar a escanear productos!"  FontSize="12" HorizontalAlignment="Left" Margin="67,42,0,0" VerticalAlignment="Top" Height="46" Width="379" HorizontalContentAlignment="Center"/>
+        
+        <DockPanel HorizontalAlignment="Left" Height="60" LastChildFill="False" Margin="0,117,0,-5" VerticalAlignment="Top" Width="481" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}">
+            <Button Name="botonOk" Cursor="Hand" Content="Ok" HorizontalAlignment="Right" Margin="370,10,0,0" VerticalAlignment="Top" Width="75" Height="26" Click="botonOk_Click" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+        </DockPanel>
+        <Image HorizontalAlignment="Left" Height="33" Margin="22,34,0,0" VerticalAlignment="Top" Width="45" Source="/ControlVentas;component/img/warning.png"/>
+
+    </Grid>
+</Window>

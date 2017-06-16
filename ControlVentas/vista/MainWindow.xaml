@@ -1,0 +1,919 @@
+﻿<Window x:Class="ControlVentas.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="731" Width="1004" WindowStartupLocation="CenterScreen" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="1004" MinHeight="731" PreviewKeyUp="Window_PreviewKeyUp">
+
+    <Window.Resources>
+        <Style x:Key="SearchTextBoxStyle"  TargetType="{x:Type TextBox}">
+            <Style.BasedOn>
+                <Style TargetType="{x:Type TextBox}">
+
+                    <Setter Property="BorderBrush">
+                        <Setter.Value>
+                            <LinearGradientBrush EndPoint="0,20" StartPoint="0,0" MappingMode="Absolute">
+                                <GradientStop Color="#FFABADB3" Offset="0.05"/>
+                                <GradientStop Color="#FFE2E3EA" Offset="0.07"/>
+                                <GradientStop Color="#FFE3E9EF" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
+
+                    <Setter Property="BorderThickness" Value="1,1,1,1"/>
+                    <Setter Property="Padding" Value="1,1,1,1"/>
+                    <Setter Property="AllowDrop" Value="True"/>
+                    <Setter Property="MinHeight" Value="22"/>
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type TextBox}">
+                                <Border CornerRadius="2" BorderThickness="1" BorderBrush="#FFCCCCCC" ClipToBounds="True">
+                                    <Grid>
+
+
+                                        <TextBlock Visibility="Collapsed" x:Name="emptyText"   HorizontalAlignment="Left" 
+                                                   VerticalAlignment="Top" Margin="2,2,0,0" Text="Búsqueda" 
+                                               TextWrapping="Wrap" FontFamily="Calibri" FontSize="12" 
+                                               Foreground="#FF808080" FontStyle="Italic" />
+
+                                        <Border x:Name="Bd" SnapsToDevicePixels="True"  BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,0,0,0" >
+                                            <Border.Background>
+                                                <SolidColorBrush Color="#00FFFFFF" x:Name="solidColor"/>
+                                            </Border.Background>
+                                            <ScrollViewer Opacity=".6" x:Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+                                <ControlTemplate.Triggers>
+
+                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self},
+                                     Path=Text}" Value="">
+                                        <Setter Property="Visibility" Value="Visible" TargetName="emptyText"/>
+                                    </DataTrigger>
+
+                                    <Trigger Property="IsFocused" Value="True">
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation Storyboard.TargetName="solidColor" Storyboard.TargetProperty="Color" To="#FFFFFFFF"
+                                                                    Duration="00:00:00.3" />
+                                                    <ThicknessAnimation Storyboard.TargetName="Bd" 
+                                                                        Storyboard.TargetProperty="BorderThickness" To="1,1,1,1" Duration="00:00:00.3"/>
+                                                    <DoubleAnimation Storyboard.TargetName="PART_ContentHost" 
+                                                                        Storyboard.TargetProperty="Opacity" To="1" Duration="00:00:00.3"/>
+
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+                                        <Trigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation Storyboard.TargetName="solidColor" Storyboard.TargetProperty="Color" To="#00FFFFFF"
+                                                                    Duration="00:00:00.2" />
+                                                    <ThicknessAnimation Storyboard.TargetName="Bd" 
+                                                                        Storyboard.TargetProperty="BorderThickness" To="0,0,0,0" Duration="00:00:00.2"/>
+                                                    <DoubleAnimation Storyboard.TargetName="PART_ContentHost" 
+                                                                        Storyboard.TargetProperty="Opacity" To=".6" Duration="00:00:00.2"/>
+
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.ExitActions>
+                                    </Trigger>
+
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+
+                    </Style.Triggers>
+                </Style>
+            </Style.BasedOn>
+        </Style>
+    </Window.Resources>
+
+
+
+    <Grid Background="#71B2D2">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <!-- SideBar Menu-->
+        <TabControl Grid.Row="0" TabStripPlacement="Left" HorizontalContentAlignment="Left">
+            <!--Estilos de items de Menu Side Bar-->
+            <TabControl.Resources>
+                <Style TargetType="TabItem" x:Key="Cabecera">
+                    <Setter Property="Visibility" Value="Hidden"/>
+                    <Setter Property="Width" Value="200"/>
+                    <Setter Property="Height" Value="40"/>
+                    <Setter Property="FontSize" Value="16" />
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter Property="Background" Value="#71B2D2" />
+                    <Setter Property="BorderBrush" Value="#71B2D2"/>
+                    <Setter Property="Opacity" Value="1"/>
+                    <Setter Property="FontWeight" Value="Normal"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type TabItem}">
+                                <Image Width="100"/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+                <Style TargetType="TabItem" x:Key="Items">
+                    <Setter Property="Height" Value="60"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="Background" Value="#71B2D2"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="BorderBrush" Value="#71B2D2"/>
+                    <Setter Property="FontWeight" Value="Light"/>
+                    <Setter Property="FontSize" Value="20"/>
+                    <Setter Property="Padding" Value="40,2,6,2"/>
+                    <Style.Triggers>
+                        <!--<Trigger Property='IsFocused' Value='True'>                       
+                            <Setter Property='Foreground' Value='Black'/>
+                        </Trigger>-->
+                        <Trigger Property='IsSelected' Value='True'>
+                            <Setter Property='Foreground' Value='Black'/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TabControl.Resources>
+            <!--Fin de estilos Side Bar-->
+
+            <TabItem Style="{StaticResource Cabecera}"/>
+            <TabItem Name="inicio" FontFamily="{StaticResource FontAwesome}" Header="&#xf015; Inicio" Style="{StaticResource Items}" IsSelected="True" GotFocus="inicio_GotFocus">
+                
+               <Grid >
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Name="labelNumeroDeVenta" Grid.Row="0" FontSize="35" Margin="0" Padding="50,50,0,0"/>
+
+
+                        <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBox Name="textoCodigoBarras" HorizontalAlignment="Right" Margin="0,38,40,38" Grid.Column="1" Height="23" TextWrapping="Wrap" Text="" Width="178"/>
+                    </Grid>
+
+                        
+                        
+                    
+                    <CheckBox  FontSize="17" ToolTip="Desactiva esta opción si quieres ver los otros ítems del menú." Name="checkComenzarToEscanear"  Content="Click aquí para escanear productos" HorizontalAlignment="Left" Width="479" Padding="1,-1,0,0" Margin="40,10,0,59" Click="checkComenzarToEscanear_Click"/>
+                    <!--RowHeaderWith="0" es para remover los botones de selección ubicados al borde de la tabla-->
+                    <DataGrid Cursor="Arrow" Grid.Row="1" IsReadOnly="True" RowHeaderWidth="0" GridLinesVisibility="None" AutoGenerateColumns="False" x:Name="gridCarroDeCompras" Foreground="#62666A" Margin="40,0,40,79" BorderBrush="Transparent" Background="White">
+                        <DataGrid.Resources>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="Background" Value="White" />
+                                <Setter Property="BorderThickness" Value="0,0,2,5"/>
+                                <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                                <Setter Property="Padding" Value="10,5,0,5"/>
+                                <Setter Property="Margin" Value="0,0,0,15"/>
+                            </Style>
+                        </DataGrid.Resources>
+
+                        <!--Agregar padding en las celdas-->
+                        <DataGrid.CellStyle>
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="FontSize" Value="18"/>
+                                <Setter Property="FontWeight" Value="Normal"/>
+                                <Setter Property="Padding" Value="10,10,0,10"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                            <Border Padding="{TemplateBinding Padding}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                                <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="#6AC4EA" />
+                                        <Setter Property="BorderBrush" Value="#6AC4EA" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.CellStyle>
+                        <!--Fin padding-->
+
+                        <!--Columnas-->
+                        <DataGrid.Columns>
+                            <!--Binding sirve para enlazar los componentes gráficos con la parte lógica,
+                        En este caso los nombres asociados al binding deben ser identicos a los métodos
+                        Get y Set de la clase CarroDeCompra Esto ocurre por que los atributos son privados,
+                        Si no fueran privados, se podría tomar el nombre del atributo de clase tal cual-->
+                            <DataGridTextColumn Binding="{Binding Nombre}" Header="Nombre" Width="*" IsReadOnly="True">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="{x:Type DataGridCell}">
+                                        <Setter Property="Background" Value="#E1F3FB" />
+                                        <Setter Property="FontSize" Value="18"/>
+                                        <Setter Property="FontWeight" Value="Normal"/>
+                                        <Setter Property="Padding" Value="10,10,0,10"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                                    <Border Padding="{TemplateBinding Padding}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                                        <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="Background" Value="#3AA0CC" />
+                                                <Setter Property="BorderBrush" Value="#3AA0CC" />
+                                            </Trigger>
+                                        </Style.Triggers>   
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Codigo}" Header="Código" Width="*" IsReadOnly="True"  />
+                            <DataGridTextColumn Binding="{Binding Cantidad}" Header="Cantidad" Width="*" IsReadOnly="True"  />
+                            <DataGridTextColumn Binding="{Binding Precio}" Header="Precio" Width="*" IsReadOnly="True"  />
+                            <DataGridTextColumn Binding="{Binding SubTotal}" Header="Sub total" Width="*" IsReadOnly="True"  />
+                            <DataGridTemplateColumn>   
+                                <DataGridTemplateColumn.Header>
+                                    <TextBlock Text="Eliminar" Padding="0,0,20,0"/>
+                                </DataGridTemplateColumn.Header>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Click="eliminarFilaGridCarroDeCompras" Foreground="#62666A" Content="&#xf014;" FontFamily="{StaticResource FontAwesome}" BorderBrush="Transparent" Background="Transparent">
+                                            <Button.Style>
+                                                <Style TargetType="{x:Type Button}">
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                                <Border Background="{TemplateBinding Background}">
+                                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                </Border>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                        <!--Fin columnas-->
+
+                    </DataGrid>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="75"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Cursor="Arrow" HorizontalContentAlignment="Center" FontSize="300"  Foreground="#E0E0E0" Name="labelImagenBarCode" FontFamily="{StaticResource FontAwesome}" Content="&#xf02a;" Margin="190,87,188,0" Grid.Row="0" VerticalAlignment="Top" Height="242"/>
+                        <Label Cursor="Arrow" Content="Escanea productos..." Name="labelTextoBarCode" HorizontalContentAlignment="Center" Foreground="#E0E0E0" Margin="190,329,188,0" VerticalAlignment="Top" Grid.Row="0"/>
+
+
+                        <Label Cursor="Arrow" Foreground="#62666A" FontSize="30" Content="Total: $" HorizontalAlignment="Left" Margin="40,0,0,0" Grid.Row="1" VerticalContentAlignment="Center" Padding="5,5,0,5" Width="102"/>
+                        <Label Cursor="Arrow" Foreground="#62666A" Name="labelTotalCarritoDeCompras" HorizontalAlignment="Left" FontSize="30" Content="0" HorizontalContentAlignment="Center" Margin="147,0,0,0" Grid.Row="1" VerticalContentAlignment="Center" Padding="0,5,5,5"/>
+                        <Button Name="botonGuardarVenta" FontWeight="ExtraLight" FontSize="20" ToolTip="Guardar venta" Foreground="White"  FontFamily="{StaticResource FontAwesome}" Content="Guardar" Background="#71B2D2" BorderBrush="#E0E0E0" Cursor="Hand"  HorizontalAlignment="Right" Margin="0,21,40,0" Grid.Row="1" VerticalAlignment="Top" Width="100" Height="40" RenderTransformOrigin="0.533,1.698" Padding="1,2" Click="botonGuardarVenta_Click" />
+                        
+
+
+                    </Grid>
+
+                       
+
+                </Grid>
+             
+               
+            </TabItem>
+            <TabItem Name="menuVentas" FontFamily="{StaticResource FontAwesome}" Header="&#xf00a; Ventas" Style="{StaticResource Items}" GotFocus="menuVentas_GotFocus">
+                <Grid >
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100"></RowDefinition>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!--Inserto un grid en la primera fila del grid externo y le agrego dos columnas-->
+                    <Grid Grid.Row="0" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="ventas" FontSize="35" Padding="50,50,0,0" Cursor="Arrow"/>
+                        
+                    </Grid>
+
+
+                    <!--RowHeaderWith="0" es para remover los botones de selección ubicados al borde de la tabla-->
+                    <DataGrid Grid.Row="1" IsReadOnly="True" RowHeaderWidth="0" GridLinesVisibility="None" AutoGenerateColumns="False" x:Name="gridVenta" Foreground="#62666A" Margin="40,0,40,75" BorderBrush="Transparent" Background="White">
+                        <DataGrid.Resources>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="Background" Value="White" />
+                                <Setter Property="BorderThickness" Value="0,0,2,5"/>
+                                <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                                <Setter Property="Padding" Value="10,5,0,5"/>
+                                <Setter Property="Margin" Value="0,0,0,15"/>
+                            </Style>
+                        </DataGrid.Resources>
+
+                        <!--Agregar padding en las celdas-->
+                        <DataGrid.CellStyle>
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="FontSize" Value="15"/>
+                                <Setter Property="FontWeight" Value="Normal"/>
+                                <Setter Property="Padding" Value="10,10,0,10"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                            <Border Padding="{TemplateBinding Padding}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                                <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="#6AC4EA" />
+                                        <Setter Property="BorderBrush" Value="#6AC4EA" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.CellStyle>
+                        <!--Fin padding-->
+
+                        <!--Columnas-->
+                        <DataGrid.Columns>
+                            <!--Binding sirve para enlazar los componentes gráficos con la parte lógica,
+                        En este caso los nombres asociados al binding deben ser identicos a los métodos
+                        Get y Set de la clase CarroDeCompra Esto ocurre por que los atributos son privados,
+                        Si no fueran privados, se podría tomar el nombre del atributo de clase tal cual-->
+                            <DataGridTextColumn Binding="{Binding IdVenta, StringFormat=\{0:D10\}}" Header="Número de venta" Width="*" IsReadOnly="True">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="{x:Type DataGridCell}">
+                                        <Setter Property="Background" Value="#E1F3FB" />
+                                        <Setter Property="FontSize" Value="18"/>
+                                        <Setter Property="FontWeight" Value="Normal"/>
+                                        <Setter Property="Padding" Value="10,10,0,10"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                                    <Border Padding="{TemplateBinding Padding}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                                        <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="Background" Value="#3AA0CC" />
+                                                <Setter Property="BorderBrush" Value="#3AA0CC" />
+                                            </Trigger>
+
+                                        </Style.Triggers>
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Total}" Header="Total" Width="*" IsReadOnly="True"/>
+                            <DataGridTextColumn Binding="{Binding Fecha, StringFormat=\{0:dd-MM-yyyy HH:mm:ss\}}" Header="Fecha" Width="*" IsReadOnly="True"/>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.Header>
+                                    <TextBlock Text="Anular" Padding="0,0,20,0"/>
+                                </DataGridTemplateColumn.Header>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Click="eliminarVenta_Click" Foreground="#62666A" Content="&#xf014;" FontFamily="{StaticResource FontAwesome}" BorderBrush="Transparent" Background="Transparent">
+                                            <Button.Style>
+                                                <Style TargetType="{x:Type Button}">
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                                <Border Background="{TemplateBinding Background}">
+                                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                </Border>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.Header>
+                                    <TextBlock Text="Ver detalle" Padding="0,0,20,0"/>
+                                </DataGridTemplateColumn.Header>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Click="verDetalleVenta_Click" Foreground="#62666A" Content="&#xf141;" FontFamily="{StaticResource FontAwesome}" BorderBrush="Transparent" Background="Transparent">
+                                            <Button.Style>
+                                                <Style TargetType="{x:Type Button}">
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                                <Border Background="{TemplateBinding Background}">
+                                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                </Border>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                        <!--Fin columnas-->
+
+                    </DataGrid>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="75"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Margin="40,0,0,0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox Name="textBoxBuscarVenta" HorizontalAlignment="Left" Margin="5,0,0,0" Style="{DynamicResource SearchTextBoxStyle}" 
+                 Width="200"  TextWrapping="Wrap" Height="25" VerticalAlignment="Top"/>
+                                <Button  Name="botonBuscarVenta" Background="#3AA0CC" FontSize="17" Foreground="White" Margin="5,0,0,0" Width="74" Height="25" Content="Buscar" VerticalAlignment="Center" Click="botonBuscarVenta_Click" />
+                            </StackPanel>
+
+                        </StackPanel>
+
+                        <ComboBox IsEditable="True" IsReadOnly="True"  Text="Mostrar más"  HorizontalAlignment="Right" VerticalAlignment="Center" Name="comboBoxVerMasVentas" FontWeight="ExtraLight" FontSize="17" ToolTip="Cargar más ventas" Foreground="Black"  Width="146" Height="25" FontFamily="{StaticResource FontAwesome}" Cursor="Hand" Margin="0,25,40,25" Grid.Row="1" RenderTransformOrigin="0.533,1.698">
+                            <ComboBox.ItemContainerStyle>
+                                <Style>
+                                    <EventSetter Event="ComboBoxItem.PreviewMouseUp" Handler="cargarMasVentas"/>
+                                </Style>
+                            </ComboBox.ItemContainerStyle>
+                            <ComboBoxItem Tag="10">Mostrar 10 más</ComboBoxItem>
+                            <ComboBoxItem Tag="all">Mostrar todo</ComboBoxItem>
+                        </ComboBox>
+
+                    </Grid>
+
+                    
+
+                </Grid>
+            </TabItem>
+            <TabItem Name="menuProductos" FontFamily="{StaticResource FontAwesome}" Header="&#xf288; Productos" Style="{StaticResource Items}" GotFocus="menuProductos_GotFocus">
+                <Grid >
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100"></RowDefinition>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!--Inserto un grid en la primera fila del grid externo y le agrego dos columnas-->
+                    <Grid Grid.Row="0" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="productos" FontSize="35" Padding="50,50,0,0" Cursor="Arrow"/>
+                    </Grid>
+
+
+                    <!--RowHeaderWith="0" es para remover los botones de selección ubicados al borde de la tabla-->
+                    <DataGrid FontSize="16" Grid.Row="1" IsReadOnly="True" RowHeaderWidth="0" GridLinesVisibility="None" AutoGenerateColumns="False" x:Name="gridProdcuto" Foreground="#62666A" Margin="40,0,40,75" BorderBrush="Transparent" Background="White">
+                        <DataGrid.Resources>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="Background" Value="White" />
+                                <Setter Property="BorderThickness" Value="0,0,2,5"/>
+                                <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                                <Setter Property="Padding" Value="10,5,0,5"/>
+                                <Setter Property="Margin" Value="0,0,0,15"/>
+                            </Style>
+                        </DataGrid.Resources>
+
+                        <!--Agregar padding en las celdas-->
+                        <DataGrid.CellStyle>
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="FontSize" Value="14"/>
+                                <Setter Property="FontWeight" Value="Normal"/>
+                                <Setter Property="Padding" Value="10,10,0,10"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                            <Border Padding="{TemplateBinding Padding}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                                <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="#6AC4EA" />
+                                        <Setter Property="BorderBrush" Value="#6AC4EA" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.CellStyle>
+                        <!--Fin padding-->
+
+                        <!--Columnas-->
+                        <DataGrid.Columns>
+                            <!--Binding sirve para enlazar los componentes gráficos con la parte lógica,
+                        En este caso los nombres asociados al binding deben ser identicos a los métodos
+                        Get y Set de la clase CarroDeCompra Esto ocurre por que los atributos son privados,
+                        Si no fueran privados, se podría tomar el nombre del atributo de clase tal cual-->
+                            <DataGridTextColumn Binding="{Binding IdProducto}" Header="Código de producto" Width="*" IsReadOnly="True">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="{x:Type DataGridCell}">
+                                        <Setter Property="Background" Value="#E1F3FB" />
+                                        <Setter Property="FontSize" Value="13"/>
+                                        <Setter Property="FontWeight" Value="Normal"/>
+                                        <Setter Property="Padding" Value="10,10,0,10"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                                    <Border Padding="{TemplateBinding Padding}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                                        <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="Background" Value="#3AA0CC" />
+                                                <Setter Property="BorderBrush" Value="#3AA0CC" />
+                                            </Trigger>
+
+                                        </Style.Triggers>
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Visibility="Hidden" Binding="{Binding IdCategoria}" Header="Categoría" Width="*" IsReadOnly="True"/>
+                            <DataGridTextColumn Binding="{Binding Categoria}" Header="Categoría" Width="*" IsReadOnly="True"/>
+                            <DataGridTextColumn Binding="{Binding Nombre}" Header="Producto" Width="*" IsReadOnly="True"/>
+                            <DataGridTextColumn Binding="{Binding Descripcion}" Header="Descripción" Width="*" IsReadOnly="True"/>
+                            <DataGridTextColumn Binding="{Binding Stock}" Header="Stock" Width="*" IsReadOnly="True"/>
+                            <DataGridTextColumn Binding="{Binding PrecioCompra}" Header="Precio de compra" Width="*" IsReadOnly="True"/>
+                            <DataGridTextColumn Binding="{Binding PrecioVenta}" Header="Precio de venta" Width="*" IsReadOnly="True"/>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.Header>
+                                    <TextBlock Text="Eliminar" Padding="0,0,20,0"/>
+                                </DataGridTemplateColumn.Header>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Click="eliminarProducto_Click" Foreground="#62666A" Content="&#xf014;" FontFamily="{StaticResource FontAwesome}" BorderBrush="Transparent" Background="Transparent">
+                                            <Button.Style>
+                                                <Style TargetType="{x:Type Button}">
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                                <Border Background="{TemplateBinding Background}">
+                                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                </Border>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.Header>
+                                    <TextBlock Text="Editar" Padding="0,0,20,0"/>
+                                </DataGridTemplateColumn.Header>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Click="editarProducto_Click" Foreground="#62666A" Content="&#xf044;" FontFamily="{StaticResource FontAwesome}" BorderBrush="Transparent" Background="Transparent">
+                                            <Button.Style>
+                                                <Style TargetType="{x:Type Button}">
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                                <Border Background="{TemplateBinding Background}">
+                                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                </Border>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                        <!--Fin columnas-->
+
+                    </DataGrid>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="75"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Margin="40,0,0,0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox Name="textBoxBuscarProducto" HorizontalAlignment="Left" Margin="5,0,0,0" Style="{DynamicResource SearchTextBoxStyle}" 
+                 Width="200"  TextWrapping="Wrap" Height="25" VerticalAlignment="Top"/>
+                                <Button  Name="botonBuscarProdcuto" Background="#3AA0CC" FontSize="17" Foreground="White" Margin="5,0,0,0" Width="74" Height="25" Content="Buscar" VerticalAlignment="Center" Click="botonBuscarProducto_Click" />
+                            </StackPanel>
+
+                        </StackPanel>
+
+                        <ComboBox IsEditable="True" IsReadOnly="True"  Text="Mostrar más"  HorizontalAlignment="Right" VerticalAlignment="Center" Name="comboBoxVerMasProductos" FontWeight="ExtraLight" FontSize="17" ToolTip="Cargar más prodcutos" Foreground="Black"  Width="146" Height="25" FontFamily="{StaticResource FontAwesome}" Cursor="Hand" Margin="0,25,40,25" Grid.Row="1" RenderTransformOrigin="0.533,1.698">
+                            <ComboBox.ItemContainerStyle>
+                                <Style>
+                                    <EventSetter Event="ComboBoxItem.PreviewMouseUp" Handler="cargarMasProductos"/>
+                                </Style>
+                            </ComboBox.ItemContainerStyle>
+                            <ComboBoxItem Tag="10">Mostrar 10 más</ComboBoxItem>
+                            <ComboBoxItem Tag="all">Mostrar todo</ComboBoxItem>
+                        </ComboBox>
+                        
+                        
+                    </Grid>
+
+                    </Grid>
+            </TabItem>
+            <TabItem Name="menuCategorias" FontFamily="{StaticResource FontAwesome}" Header="&#xf0cb; Categorías" Style="{StaticResource Items}" GotFocus="menuCategorias_GotFocus">
+                <Grid >
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100"></RowDefinition>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!--Inserto un grid en la primera fila del grid externo y le agrego dos columnas-->
+                    <Grid Grid.Row="0" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="categorias" FontSize="35" Padding="50,50,0,0" Cursor="Arrow"/>
+                    </Grid>
+                    
+
+                    <!--RowHeaderWith="0" es para remover los botones de selección ubicados al borde de la tabla-->
+                    <DataGrid Grid.Row="1" IsReadOnly="True" RowHeaderWidth="0" GridLinesVisibility="None" AutoGenerateColumns="False" x:Name="gridCategoria" Foreground="#62666A" Margin="40,0,40,75" BorderBrush="Transparent" Background="White">
+                        <DataGrid.Resources>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="Background" Value="White" />
+                                <Setter Property="BorderThickness" Value="0,0,2,5"/>
+                                <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                                <Setter Property="Padding" Value="10,5,0,5"/>
+                                <Setter Property="Margin" Value="0,0,0,15"/>
+                            </Style>
+                        </DataGrid.Resources>
+
+                        <!--Agregar padding en las celdas-->
+                        <DataGrid.CellStyle>
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="FontSize" Value="15"/>
+                                <Setter Property="FontWeight" Value="Normal"/>
+                                <Setter Property="Padding" Value="10,10,0,10"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                            <Border Padding="{TemplateBinding Padding}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                                <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="#6AC4EA" />
+                                        <Setter Property="BorderBrush" Value="#6AC4EA" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.CellStyle>
+                        <!--Fin padding-->
+
+                        <!--Columnas-->
+                        <DataGrid.Columns>
+                            <!--Binding sirve para enlazar los componentes gráficos con la parte lógica,
+                        En este caso los nombres asociados al binding deben ser identicos a los métodos
+                        Get y Set de la clase CarroDeCompra Esto ocurre por que los atributos son privados,
+                        Si no fueran privados, se podría tomar el nombre del atributo de clase tal cual-->
+                            <DataGridTextColumn Binding="{Binding IdCategoria}" Header="Código de categoría" Width="*" IsReadOnly="True">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="{x:Type DataGridCell}">
+                                        <Setter Property="Background" Value="#E1F3FB" />
+                                        <Setter Property="FontSize" Value="18"/>
+                                        <Setter Property="FontWeight" Value="Normal"/>
+                                        <Setter Property="Padding" Value="10,10,0,10"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                                    <Border Padding="{TemplateBinding Padding}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                                        <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="Background" Value="#3AA0CC" />
+                                                <Setter Property="BorderBrush" Value="#3AA0CC" />
+                                            </Trigger>
+
+                                        </Style.Triggers>
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Nombre}" Header="Categoría" Width="*" IsReadOnly="True"/>                   
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.Header>
+                                    <TextBlock Text="Eliminar" Padding="0,0,20,0"/>
+                                </DataGridTemplateColumn.Header>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Click="eliminarCategoria_Click" Foreground="#62666A" Content="&#xf014;" FontFamily="{StaticResource FontAwesome}" BorderBrush="Transparent" Background="Transparent">
+                                            <Button.Style>
+                                                <Style TargetType="{x:Type Button}">
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                                <Border Background="{TemplateBinding Background}">
+                                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                </Border>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.Header>
+                                    <TextBlock Text="Editar" Padding="0,0,20,0"/>
+                                </DataGridTemplateColumn.Header>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Click="editarCategoria_Click" Foreground="#62666A" Content="&#xf044;" FontFamily="{StaticResource FontAwesome}" BorderBrush="Transparent" Background="Transparent">
+                                            <Button.Style>
+                                                <Style TargetType="{x:Type Button}">
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                                <Border Background="{TemplateBinding Background}">
+                                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                </Border>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                        <!--Fin columnas-->
+
+                    </DataGrid>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="75"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Margin="40,0,0,0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox Name="textBoxBuscarCategoria" HorizontalAlignment="Left" Margin="5,0,0,0" Style="{DynamicResource SearchTextBoxStyle}" 
+                 Width="200"  TextWrapping="Wrap" Height="25" VerticalAlignment="Top"/>
+                                <Button  Name="botonBuscarCategoria" Background="#3AA0CC" FontSize="17" Foreground="White" Margin="5,0,0,0" Width="74" Height="25" Content="Buscar" VerticalAlignment="Center" Click="botonBuscarCategoria_Click" />
+                            </StackPanel>
+
+                        </StackPanel>
+
+
+                        <ComboBox IsEditable="True" IsReadOnly="True"  Text="Mostrar más"  HorizontalAlignment="Right" VerticalAlignment="Center" Name="comboBoxVerMasCategorias" FontWeight="ExtraLight" FontSize="17" ToolTip="Cargar más prodcutos" Foreground="Black"  Width="146" Height="25" FontFamily="{StaticResource FontAwesome}" Cursor="Hand" Margin="0,25,40,25" Grid.Row="1" RenderTransformOrigin="0.533,1.698">
+                            <ComboBox.ItemContainerStyle>
+                                <Style>
+                                    <EventSetter Event="ComboBoxItem.PreviewMouseUp" Handler="cargarMasCategorias"/>
+                                </Style>
+                            </ComboBox.ItemContainerStyle>
+                            <ComboBoxItem Tag="10">Mostrar 10 más</ComboBoxItem>
+                            <ComboBoxItem Tag="all">Mostrar todo</ComboBoxItem>
+                        </ComboBox>
+
+
+                    </Grid>
+
+                </Grid>
+            </TabItem>
+            <!--Lista: &#xf00b;-->
+            <!--Productos:&#xf288 -->
+            
+            
+            
+        </TabControl>
+        <!--Fin SideBar Menu-->
+        
+        <!--Barra inferior-->
+        <DockPanel Grid.Row="1" Name="barraInferior" Margin="0,0,0,0" Background="#3B434E">
+            <DockPanel.Resources>
+                <Style TargetType="Button" x:Key="boton">
+                    <Setter Property="BorderBrush" Value="{x:Null}"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Width" Value="105"/>
+                    <Setter Property="FontWeight" Value="Thin"/>
+                </Style>
+            </DockPanel.Resources>
+            
+            <!--Botón nuevo-->
+            <Button Click="botonCrear_Click" x:Name="botonCrear" Style="{StaticResource boton}" Margin="30,0,0,0" HorizontalAlignment="Left">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock FontSize="30" Text="&#xf067;" FontFamily="{StaticResource FontAwesome}"/>
+                    <Separator Width="6" Height="0"/>
+                    <TextBlock FontSize="15" Text="Nuevo" Padding="0,3,0,0"/>
+                </StackPanel>
+            </Button>
+            <!--Fin botón nuevo-->
+
+            <!--Boton de Manual-->
+            <Button ToolTip="Abrir manual de uso" Cursor="Hand" Background="#3AA6F4" Width="22" Height="22" HorizontalAlignment="Right" Margin="0,0,30,0">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Ellipse Stroke="Black"
+                         StrokeThickness="0.3">
+                                <Ellipse.Fill>
+                                    <RadialGradientBrush>                                       
+                                        <GradientStop Offset="1"
+                                          Color="#3AA6F4" />                                                                       
+                                    </RadialGradientBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <TextBlock FontSize="15" Text="&#xf128;" FontFamily="{StaticResource FontAwesome}" TextAlignment="Center" Foreground="White" Padding="0,4,0,0"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <!--Fin botón de manual-->
+            
+        </DockPanel>
+        <!--Fin barra inferior-->
+        
+        
+    </Grid>
+</Window>
